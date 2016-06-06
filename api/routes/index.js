@@ -16,6 +16,11 @@ router.route('/profiles/:id')
   .delete(Profiles.delete)
   .put(Profiles.update);
 
+router.get('/valid-token', function(req, res){
+	var token = req.get("token");
+	return res.status(200).json(token);
+});
+
 // router.post('/query', function(req, res){
 //   var q = req.body.query;
 //   req.getConnection(function(err,connection){
