@@ -17,10 +17,12 @@ var updateToken = function(connection, id, token){
 }
 
 exports.do = function(req, res) {
-	var login    = req.body["login"];
+	var user    = req.body["user"];
 	var password = req.body["password"];
 
-	if(login == null){
+	console.log(req.body);
+
+	if(user == null){
 		return res.status(400).json({"err":"Login em branco"});
 	}
 
@@ -31,7 +33,7 @@ exports.do = function(req, res) {
 	cPassword = crypto.createHash('md5').update(password).digest("hex");
 
 	req.getConnection(function(err,connection){
-        connection.query('SELECT * FROM logins WHERE user = ? AND password = ?;',[login, cPassword],function(err,result){
+        connection.query('SELECT * FROM logins WHERE user = ? AND password = ?;',[user, cPassword],function(err,result){
 			if(err) return res.status(400).json(err);
 
 			if(Object.keys(result).length > 0){

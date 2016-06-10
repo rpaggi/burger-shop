@@ -4,11 +4,6 @@
 #include <string>
 
 int main(int argc, char *argv[]){
-	if(argc < 2){
-		std::cout << "Voce precisa informar um parametro" << std::endl;
-		return 0;
-	}
-
 	// initialize RestClient
 	RestClient::init();
 
@@ -27,9 +22,9 @@ int main(int argc, char *argv[]){
 	conn->SetHeaders(headers);
 	
 	// append additional headers
-	conn->AppendHeader("token", argv[1]);
+	//conn->AppendHeader("token", argv[1]);
 	
-	RestClient::Response r = conn->get("/valid-token");
+	RestClient::Response r = conn->post("/login", "user=admin&password=admin");
 
 	std::cout << r.body << std::endl;
 	
