@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>BurgerShop</title>
+
+	<style type="text/css" media="screen">
+		*{
+			margin: 0;
+		}
+
+		body{
+			background: rgb(110, 150, 200);
+			color: rgb(230,240,255);
+		}
+		.main-menu{
+			margin: 0;
+			width: 100%;
+			height: 2em;
+			background: rgb(100, 130, 180);
+		}
+
+		.main-menu ul {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		.main-menu ul li {
+			margin: 0 -0.15em;
+			width: 7em;
+			text-align: center;
+		}
+
+		.main-menu .main-item{
+			display: inline-block;
+		}
+
+		.main-menu .main-item ul li{
+			display: inline-block;
+			margin: 0;
+		}
+
+		.main-menu li ul {
+			position: relative;
+			float: left;
+			display: none;
+		}
+
+		.main-menu ul li a {
+			display: block;
+			text-decoration: none;
+			color: rgb(30, 70, 100);
+			padding: 0.4em;
+			border: 0.1em solid rgb(75, 115, 165);
+			border-bottom: 0;
+			background: rgb(100, 130, 180);
+		}
+
+		.main-menu li:hover ul {
+			display: block; 
+		}
+
+		footer {
+		    position: absolute;
+		    z-index: 10;
+		    bottom: 0;
+		    height: 2em;
+		    width: 100%;
+		    padding-top: 0.8em;
+			background: rgb(100, 130, 180);
+			text-align: center;
+		}
+
+	</style>
+</head>
+<body>
+	<header>
+		<div class="main-menu">
+		<ul>
+			<li class="main-item"><a href="#" title="">Home</a>
+				<ul>
+				<li><a href="#" title="">Home 1</a></li>
+				<li><a href="#" title="">Home 2</a></li>
+				<li><a href="#" title="">Home 3</a></li>
+				</ul>
+			</li>
+			<li class="main-item"><a href="#" title="">Help</a>
+				<ul>
+				<li><a href="#" title="">Help 1</a></li>
+				<li><a href="#" title="">Help 2</a></li>
+				<li><a href="#" title="">Help 3</a></li>
+				</ul>
+			</li>
+		</ul>
+		</div>
+	</header>
+	<content>
+		<h1>SISTEMA FULERO!</h1>
+	</content>
+	<footer>
+		BurgerShop - Versão 1.0 - Licenciado para InRock Burger
+	</footer>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "burger-shop",
+  "version": "1.0.0",
+  "description": "A application to manage your BurgerShop",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "package": "electron-packager . BugerShop --platform=linux --arch=x64"
+  },
+  "keywords": [
+    "burger",
+    "shop"
+  ],
+  "author": "rpaggi",
+  "devDependencies": {
+    "electron-prebuilt": "^1.2.0",
+    "electron-packager": "^7.0.3"
+  }
+}
