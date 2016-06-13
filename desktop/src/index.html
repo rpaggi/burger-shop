@@ -7,14 +7,16 @@
 
 	<title>BurgerShop</title>
 
+	<script> require ('angular'); </script>
+	
 	<style type="text/css" media="screen">
 		*{
 			margin: 0;
 		}
 
 		body{
-			background: rgb(110, 150, 200);
-			color: rgb(230,240,255);
+			background: #CCC;
+			color: #333;
 			font-family: "Trebuchet MS";
 		}
 
@@ -22,25 +24,32 @@
 			width: 100%;
 		}
 
+		content h1{
+			margin: 0.3em 0 0 0.3em;
+		}
+
 		footer {
 		    position: absolute;
 		    z-index: 10;
 		    bottom: 0;
-		    height: 2em;
+		    height: 1em;
 		    width: 100%;
-		    padding-top: 0.8em;
-			background: rgb(100, 130, 180);
-			text-align: center;
+			background: #AAA;
+			text-align: right;
+			font-size: 0.8em;
+			padding: 0.2em 0.5em 0.2em 0em;
+			margin-left: -0.5em
 		}
 
 	</style>
 </head>
-<body>
+<body ng-app>
 	<header>
 
 	</header>
 	<content>
-		<h1>SISTEMA FULERO!</h1>
+		<h1>BugerShop</h1>
+		<p>{{ 2+2 }}</p>
 	</content>
 	<footer>
 		BurgerShop - Versão 1.0 - Licenciado para InRock Burger
