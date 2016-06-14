@@ -20,12 +20,6 @@ router.route('/profiles/:id')
 router.route('/login')
 	.post(Logins.do)
 
-router.get('/valid-token', function(req, res){
-	var token = req.get("token");
-	console.log(token);
-	return res.status(200).json(token);
-});
-
 // router.post('/query', function(req, res){
 //   var q = req.body.query;
 //   req.getConnection(function(err,connection){
