@@ -2,6 +2,7 @@ var express  = require('express');
 var router   = express.Router();
 var Profiles = getmodule('models/profiles');
 var Logins   = getmodule('models/logins');
+var Token   = getmodule('api_modules/token');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -9,13 +10,13 @@ router.get('/', function(req, res, next) {
 });
 
 router.route('/profiles')
-	.get(Profiles.all)
-	.post(Profiles.create);
+	.get([Token.validtoken, Profiles.all])
+	.post([Token.validtoken, Profiles.create]);
 
 router.route('/profiles/:id')
-	.get(Profiles.get)
-	.delete(Profiles.delete)
-	.put(Profiles.update);
+	.get([Token.validtoken,Profiles.get])
+	.delete([Token.validtoken, Profiles.delete])
+	.put([Token.validtoken, Profiles.update]);
 
 router.route('/login')
 	.post(Logins.do)

@@ -22,16 +22,18 @@ function getProfileSalt(p){
   }
 }
 
-exports.validtoken = function(token){
+exports.validtoken = function(req, res, next){
+  var token = req.get("token");
   if (token == null)
     return false
 
-  TokenGenerator.options.salt         = getProfileSalt(String(token).substring(14));
-  console.log(TokenGenerator.isValid(String(token).substring(0,14)))
-  return TokenGenerator.isValid(String(token).substring(0,14));
+  TokenGenerator.options.salt = getProfileSalt(String(token).substring(14));
+  if(TokenGenerator.isValid(String(token).substring(0,14)))
+    next();
+  else return res.status(400).json({"err":"Token inválido!"});
 }
 
 exports.generate = function(profile){
-  TokenGenerator.options.salt         = getProfileSalt(profile);
+  TokenGenerator.options.salt = getProfileSalt(profile);
   return TokenGenerator.generate() + profile;
 }
