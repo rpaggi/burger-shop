@@ -1,3 +1,5 @@
+var TokenGenerator = getmodule('api_modules/token');
+
 exports.all = function(req, res) {
 	req.getConnection(function(err,connection){
         connection.query('Select * from profiles;',[],function(err,result){
@@ -9,7 +11,11 @@ exports.all = function(req, res) {
 }
 
 exports.get = function(req, res) {
+		if(!TokenGenerator.validtoken(req.get("token")))
+			return res.status(400).json(null);
+
     var id = req.params.id;
+
     req.getConnection(function(err,connection){
 		connection.query('Select * from profiles where id = ?;',[id],function(err,result){
 			if(err) return res.status(400).json(err);

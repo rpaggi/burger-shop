@@ -1,7 +1,7 @@
 var express  = require('express');
 var router   = express.Router();
-var Profiles = getmodule('src/profiles');
-var Logins   = getmodule('src/logins');
+var Profiles = getmodule('models/profiles');
+var Logins   = getmodule('models/logins');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
