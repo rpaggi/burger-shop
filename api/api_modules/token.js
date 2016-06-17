@@ -37,3 +37,14 @@ exports.generate = function(profile){
   TokenGenerator.options.salt = getProfileSalt(profile);
   return TokenGenerator.generate() + profile;
 }
+
+
+exports.verifiesPermission = function(token, levels){
+	var profile = String(token).substring(14)
+  for(i in levels){
+  	if (profile == levels[i]){
+  		return true;
+  	}
+  }
+	return {err:"Usuário sem permissão para executar função"};
+}

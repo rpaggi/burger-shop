@@ -31,8 +31,8 @@ CREATE TABLE logins(
     password varchar(40) NOT NULL,
     profile int(11) NOT NULL,
     token varchar(50) NULL DEFAULT NULL,
-    last_login timestamp NOT NULL,
-    hincl timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    last_login timestamp NOT NULL DEFAULT 0,
+    hincl timestamp NOT NULL DEFAULT now(),
     UNIQUE INDEX UNI (`user`),
     CONSTRAINT logins_pk PRIMARY KEY (id)
 ) ENGINE InnoDB;

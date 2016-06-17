@@ -21,6 +21,12 @@ router.route('/profiles/:id')
 router.route('/login')
 	.post(Logins.do)
 
+router.route('/users')
+	.post([Token.validtoken,Logins.add])
+
+router.route('/users/:user')
+	.get([Token.validtoken,Logins.getByUser])
+
 // router.post('/query', function(req, res){
 //   var q = req.body.query;
 //   req.getConnection(function(err,connection){
