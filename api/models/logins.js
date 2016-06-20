@@ -74,11 +74,6 @@ exports.add = function(req, res){
 			return res.status(200).json(result);
 		});
 	});
-
-	// var login = {
-	// 	user:req.body["user"];,
-	//
-	// }
 }
 
 exports.getByUser = function(req, res){
