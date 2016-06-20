@@ -24,8 +24,10 @@ router.route('/login')
 router.route('/users')
 	.post([Token.validtoken,Logins.add])
 
-router.route('/users/:user')
+router.route('/users/:p')
 	.get([Token.validtoken,Logins.getByUser])
+	.put([Token.validtoken,Logins.update])
+	.delete([Token.validtoken,Logins.delete])
 
 // router.post('/query', function(req, res){
 //   var q = req.body.query;

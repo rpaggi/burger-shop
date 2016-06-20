@@ -46,10 +46,7 @@ exports.do = function(req, res) {
 }
 
 exports.add = function(req, res){
-	if(TokenGenerator.verifiesPermission(req.get("token"), profiles).err)
-		return res.status(400).json(testa);
-	else
-		return res.status(200).json(testa);
+	if(TokenGenerator.verifiesPermission(req.get("token"), profiles).err) return res.status(400).json(verify);
 
 	if(req.body.user == null || req.body.user == ""){
 		return res.status(400).json({err:"Usuário inválido"});
@@ -85,15 +82,51 @@ exports.add = function(req, res){
 }
 
 exports.getByUser = function(req, res){
-	var verify = TokenGenerator.verifiesPermission(req.get("token"), profiles);
-	if(verify.err)
-		return res.status(400).json(verify);
+	if(TokenGenerator.verifiesPermission(req.get("token"), profiles).err) return res.status(400).json(verify);
 
-	var user = req.params.user;
+	var user = req.params.p;
 	req.getConnection(function(err, connection){
 		connection.query(
 			'SELECT * FROM logins WHERE user = ?',
 			[user],
+			function(err, result){
+				if (err) return res.status(400).json(err);
+
+				return res.status(200).json(result);
+			}
+		)
+	});
+}
+
+exports.delete = function(req, res){
+	if(TokenGenerator.verifiesPermission(req.get("token"), profiles).err) return res.status(400).json(verify);
+
+	var id = req.params.p;
+	req.getConnection(function(err, connection){
+		connection.query(
+			'DELETE FROM logins WHERE id = ?',
+			[id],
+			function(err, result){
+				if (err) return res.status(400).json(err);
+
+				return res.status(200).json(result);
+			}
+		)
+	});
+}
+
+exports.update = function(req, res){
+	if(TokenGenerator.verifiesPermission(req.get("token"), profiles).err) return res.status(400).json(verify);
+
+	var id = req.params.p;
+	var data = req.body;
+
+	if(data.password) data.password = crypto.createHash('md5').update(data.password).digest("hex");
+
+	req.getConnection(function(err, connection){
+		connection.query(
+			'UPDATE logins SET ? WHERE id = ?',
+			[data, id],
 			function(err, result){
 				if (err) return res.status(400).json(err);
 
