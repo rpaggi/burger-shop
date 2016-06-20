@@ -76,6 +76,23 @@ exports.add = function(req, res){
 	});
 }
 
+exports.get = function(req, res){
+	if(TokenGenerator.verifiesPermission(req.get("token"), profiles).err) return res.status(400).json(verify);
+
+	var id = req.params.p;
+	req.getConnection(function(err, connection){
+		connection.query(
+			'SELECT * FROM logins WHERE id = ?',
+			[id],
+			function(err, result){
+				if (err) return res.status(400).json(err);
+
+				return res.status(200).json(result);
+			}
+		)
+	});
+}
+
 exports.getByUser = function(req, res){
 	if(TokenGenerator.verifiesPermission(req.get("token"), profiles).err) return res.status(400).json(verify);
 

@@ -75,6 +75,23 @@ exports.get = function(req, res){
 	});
 }
 
+exports.getByPhone = function(req, res){
+	if(TokenGenerator.verifiesPermission(req.get("token"), profiles).err) return res.status(400).json(verify);
+
+	var phone = req.params.p;
+	req.getConnection(function(err, connection){
+		connection.query(
+			'SELECT * FROM clients WHERE phone1 = ?',
+			[phone],
+			function(err, result){
+				if (err) return res.status(400).json(err);
+
+				return res.status(200).json(result);
+			}
+		)
+	});
+}
+
 exports.delete = function(req, res){
 	if(TokenGenerator.verifiesPermission(req.get("token"), profiles).err) return res.status(400).json(verify);
 
