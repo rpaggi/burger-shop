@@ -80,7 +80,7 @@ exports.update = function(req, res){
 
 	req.getConnection(function(err, connection){
 		connection.query(
-			'UPDATE logins SET ? WHERE id = ?',
+			'UPDATE tables SET ? WHERE id = ?',
 			[data, id],
 			function(err, result){
 				if (err) return res.status(400).json(err);
