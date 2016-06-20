@@ -8,12 +8,12 @@ CREATE TABLE clients (
     name varchar(50) NOT NULL,
     address varchar(150) NOT NULL,
     number varchar(20) NOT NULL,
-    complement varchar(20) NULL,
-    city varchar(60) NOT NULL,
-    state varchar(2) NOT NULL,
-    zipcode int NOT NULL,
+    complement varchar(20) DEFAULT NULL,
+    city varchar(60) DEFAULT NULL,
+    state varchar(2) DEFAULT NULL,
+    zipcode int DEFAULT NULL,
     phone1 int NOT NULL,
-    phone2 int NOT NULL,
+    phone2 int DEFAULT NULL,
     hincl timestamp NOT NULL,
     UNIQUE INDEX unique_key (phone1),
     CONSTRAINT clients_pk PRIMARY KEY (id)
@@ -98,7 +98,7 @@ CREATE INDEX INDEX1 ON profiles (id);
 -- Table: tables
 CREATE TABLE tables (
     id int NOT NULL,
-    name int NOT NULL,
+    name varchar(50) NOT NULL,
     UNIQUE INDEX `unique` (id),
     CONSTRAINT tables_pk PRIMARY KEY (id)
 );
@@ -133,4 +133,3 @@ ALTER TABLE orders ADD CONSTRAINT orders_tables FOREIGN KEY orders_tables (table
     REFERENCES tables (id);
 
 -- End of file.
-
