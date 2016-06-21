@@ -24,7 +24,7 @@ var dbinfo = {
   port : 3306,
   database:'burgershop',
   ifNotExist:true,
-  dest:'./backups/database.sql'
+  backfile:'./backups/database.sql'
 }
 
 var app = express();
