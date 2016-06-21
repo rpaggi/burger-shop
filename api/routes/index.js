@@ -1,11 +1,12 @@
-var express  = require('express');
-var router   = express.Router();
-var Profiles = getmodule('models/profiles');
-var Logins   = getmodule('models/logins');
-var Tables   = getmodule('models/tables');
-var Clients  = getmodule('models/clients');
-var Token    = getmodule('api_modules/token');
-var Backup   = getmodule('api_modules/backup');
+var express      = require('express');
+var router       = express.Router();
+var Profiles     = getmodule('models/profiles');
+var Logins       = getmodule('models/logins');
+var Tables       = getmodule('models/tables');
+var Clients      = getmodule('models/clients');
+var OrderSources = getmodule('models/order-sources');
+var Token        = getmodule('api_modules/token');
+var Backup       = getmodule('api_modules/backup');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -14,11 +15,13 @@ router.get('/', function(req, res, next) {
 
 router.route('/profiles')
 	.get([Profiles.perm,Token.validtoken, Profiles.all])
-	.post([Profiles.perm,Token.validtoken, Profiles.create]);
 router.route('/profiles/:id')
 	.get([Profiles.perm,Token.validtoken,Profiles.get])
-	.delete([Profiles.perm,Token.validtoken, Profiles.delete])
-	.put([Profiles.perm,Token.validtoken, Profiles.update]);
+
+	router.route('/order-sources')
+		.get([Profiles.perm,Token.validtoken, Profiles.all])
+	router.route('/order-sources/:id')
+		.get([Profiles.perm,Token.validtoken,Profiles.get])
 
 router.route('/login')
 	.post(Logins.do)
