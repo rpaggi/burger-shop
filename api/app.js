@@ -9,10 +9,23 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+//  |==-- -------- ------- --- ------------ --== |
+//  |==-- DATABASE MODULES AND INFORMATIONS --== |
+//  |==-- -------- ------- --- ------------ --== |
+
 var mysql = require('mysql');
 var mysqlDump = require('mysqldump');
 var connection = require('express-myconnection');
 var connDump = getmodule('api_modules/conn-dump');
+var dbinfo = {
+  host: 'localhost',
+  user: 'root',
+  password : 'senha',
+  port : 3306,
+  database:'burgershop',
+  ifNotExist:true,
+  dest:'./backups/database.sql'
+}
 
 var app = express();
 
@@ -30,25 +43,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(
-   connection(mysql,{
-     host: 'localhost',
-     user: 'root',
-     password : 'senha',
-     port : 3306, //port mysql
-     database:'burgershop'
-   },'request')
+   connection(mysql,dbinfo,'request')
 );
 app.use(
-  connDump(mysqlDump,
-    {
-    	host: 'localhost',
-    	user: 'root',
-    	password: 'senha',
-    	database: 'burgershop',
-    	ifNotExist:true, // Create table if not exist
-    	dest:'./backups/database.sql' // destination file
-    }
-  )
+  connDump(mysqlDump,dbinfo)
 );
 
 app.use('/', routes);

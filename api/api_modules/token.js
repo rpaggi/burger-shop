@@ -22,29 +22,35 @@ function getProfileSalt(p){
   }
 }
 
+
+function verifiesPermission (token, profiles){
+	var profile = String(token).substring(14)
+  for(i in profiles){
+  	if(profile == profiles[i]){
+  		return true
+  	}
+  }
+  return false;
+}
+
 exports.validtoken = function(req, res, next){
   var token = req.get("token");
+  var profiles = req.profiles;
+
   if (token == null)
     return false
 
   TokenGenerator.options.salt = getProfileSalt(String(token).substring(14));
-  if(TokenGenerator.isValid(String(token).substring(0,14)))
-    next();
-  else return res.status(400).json({"err":"Token inválido!"});
+  if(!TokenGenerator.isValid(String(token).substring(0,14)))
+    return res.status(400).json({err:"Token inválido!"});
+
+  if(!verifiesPermission(token, profiles))
+    return res.status(400).json({err:'Usuário sem permissão para executar função'});
+
+  next();
 }
 
 exports.generate = function(profile){
   TokenGenerator.options.salt = getProfileSalt(profile);
   return TokenGenerator.generate() + profile;
-}
-
-
-exports.verifiesPermission = function(token, levels){
-	var profile = String(token).substring(14)
-  for(i in levels){
-  	if (profile == levels[i]){
-  		return true;
-  	}
-  }
-	return {err:"Usuário sem permissão para executar função"};
 }

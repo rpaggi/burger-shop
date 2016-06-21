@@ -3,8 +3,9 @@ var router   = express.Router();
 var Profiles = getmodule('models/profiles');
 var Logins   = getmodule('models/logins');
 var Tables   = getmodule('models/tables');
-var Clients   = getmodule('models/clients');
-var Token   = getmodule('api_modules/token');
+var Clients  = getmodule('models/clients');
+var Token    = getmodule('api_modules/token');
+var Backup   = getmodule('api_modules/backup');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -12,46 +13,41 @@ router.get('/', function(req, res, next) {
 });
 
 router.route('/profiles')
-	.get([Token.validtoken, Profiles.all])
-	.post([Token.validtoken, Profiles.create]);
+	.get([Profiles.perm,Token.validtoken, Profiles.all])
+	.post([Profiles.perm,Token.validtoken, Profiles.create]);
 router.route('/profiles/:id')
-	.get([Token.validtoken,Profiles.get])
-	.delete([Token.validtoken, Profiles.delete])
-	.put([Token.validtoken, Profiles.update]);
+	.get([Profiles.perm,Token.validtoken,Profiles.get])
+	.delete([Profiles.perm,Token.validtoken, Profiles.delete])
+	.put([Profiles.perm,Token.validtoken, Profiles.update]);
 
 router.route('/login')
 	.post(Logins.do)
 router.route('/users')
-	.post([Token.validtoken,Logins.add])
+	.post([Logins.perm,Token.validtoken,Logins.add])
 router.route('/users/:p')
-	.get([Token.validtoken,Logins.get])
-	.put([Token.validtoken,Logins.update])
-	.delete([Token.validtoken,Logins.delete])
+	.get([Logins.perm,Token.validtoken,Logins.get])
+	.put([Logins.perm,Token.validtoken,Logins.update])
+	.delete([Logins.perm,Token.validtoken,Logins.delete])
 	router.route('/users/name/:p')
-	.get([Token.validtoken,Logins.getByUser])
+	.get([Logins.perm,Token.validtoken,Logins.getByUser])
 
 router.route('/tables')
-	.post([Token.validtoken,Tables.add])
+	.post([Tables.perm,Token.validtoken,Tables.add])
 router.route('/tables/:p')
-	.get([Token.validtoken,Tables.get])
-	.put([Token.validtoken,Tables.update])
-	.delete([Token.validtoken,Tables.delete])
+	.get([Tables.perm,Token.validtoken,Tables.get])
+	.put([Tables.perm,Token.validtoken,Tables.update])
+	.delete([Tables.perm,Token.validtoken,Tables.delete])
 
 router.route('/clients')
-	.post([Token.validtoken,Clients.add])
+	.post([Clients.perm,Token.validtoken,Clients.add])
 router.route('/clients/:p')
-	.get([Token.validtoken,Clients.get])
-	.put([Token.validtoken,Clients.update])
-	.delete([Token.validtoken,Clients.delete])
-	router.route('/clients/phone/:p')
-	.get([Token.validtoken,Clients.getByPhone])
+	.get([Clients.perm,Token.validtoken,Clients.get])
+	.put([Clients.perm,Token.validtoken,Clients.update])
+	.delete([Clients.perm,Token.validtoken,Clients.delete])
+router.route('/clients/phone/:p')
+	.get([Clients.perm,Token.validtoken,Clients.getByPhone])
 
 router.route('/backup')
-		.get(function(req,res){
-			req.getConnDump(function(err){
-				if(err) return res.status(400).json(err);				
-				return res.status(200).json("{0}")
-			});
-})
+	.get([Backup.perm,Token.validtoken,Backup.do])
 
 module.exports = router;

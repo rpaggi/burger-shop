@@ -1,8 +1,6 @@
 var crypto = require('crypto');
 var TokenGenerator = getmodule('api_modules/token');
 
-var profiles = [1];
-
 var updateToken = function(connection, id, token){
 	connection.query(
 		'UPDATE logins SET token = ? WHERE id = ?;',
@@ -13,6 +11,11 @@ var updateToken = function(connection, id, token){
 
 	return null;
 }
+
+exports.perm = function(req, res, next){
+	req.profiles = [1];
+	next();
+};
 
 exports.do = function(req, res) {
 	var user    = req.body["user"];
@@ -46,8 +49,6 @@ exports.do = function(req, res) {
 }
 
 exports.add = function(req, res){
-	if(TokenGenerator.verifiesPermission(req.get("token"), profiles).err) return res.status(400).json(verify);
-
 	if(req.body.user == null || req.body.user == ""){
 		return res.status(400).json({err:"Usuário inválido"});
 	}
@@ -77,8 +78,6 @@ exports.add = function(req, res){
 }
 
 exports.get = function(req, res){
-	if(TokenGenerator.verifiesPermission(req.get("token"), profiles).err) return res.status(400).json(verify);
-
 	var id = req.params.p;
 	req.getConnection(function(err, connection){
 		connection.query(
@@ -94,8 +93,6 @@ exports.get = function(req, res){
 }
 
 exports.getByUser = function(req, res){
-	if(TokenGenerator.verifiesPermission(req.get("token"), profiles).err) return res.status(400).json(verify);
-
 	var user = req.params.p;
 	req.getConnection(function(err, connection){
 		connection.query(
@@ -111,8 +108,6 @@ exports.getByUser = function(req, res){
 }
 
 exports.delete = function(req, res){
-	if(TokenGenerator.verifiesPermission(req.get("token"), profiles).err) return res.status(400).json(verify);
-
 	var id = req.params.p;
 	req.getConnection(function(err, connection){
 		connection.query(
@@ -128,7 +123,6 @@ exports.delete = function(req, res){
 }
 
 exports.update = function(req, res){
-	if(TokenGenerator.verifiesPermission(req.get("token"), profiles).err) return res.status(400).json(verify);
 
 	var id = req.params.p;
 	var data = req.body;

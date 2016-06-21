@@ -1,21 +1,15 @@
 var crypto = require('crypto');
 var TokenGenerator = getmodule('api_modules/token');
 
-var profiles = [1,2,3];
-
-var updateToken = function(connection, id, token){
-	connection.query(
-		'UPDATE logins SET token = ? WHERE id = ?;',
-		[token, id],
-		function(err,result){
-			if(err) return err
-		});
-
-	return null;
-}
+exports.perm = function(req, res, next){
+	req.profiles = [1,2,3];
+	next();
+};
 
 exports.add = function(req, res){
-	if(TokenGenerator.verifiesPermission(req.get("token"), profiles).err) return res.status(400).json(verify);
+	TokenGenerator.verifiesPermission(req.get("token"), profiles, function(err){
+		if(err) return res.status(400).json(err);
+	});
 
 	var data = req.body;
 
@@ -59,7 +53,9 @@ exports.add = function(req, res){
 }
 
 exports.get = function(req, res){
-	if(TokenGenerator.verifiesPermission(req.get("token"), profiles).err) return res.status(400).json(verify);
+	TokenGenerator.verifiesPermission(req.get("token"), profiles, function(err){
+		if(err) return res.status(400).json(err);
+	});
 
 	var id = req.params.p;
 	req.getConnection(function(err, connection){
@@ -76,7 +72,9 @@ exports.get = function(req, res){
 }
 
 exports.getByPhone = function(req, res){
-	if(TokenGenerator.verifiesPermission(req.get("token"), profiles).err) return res.status(400).json(verify);
+	TokenGenerator.verifiesPermission(req.get("token"), profiles, function(err){
+		if(err) return res.status(400).json(err);
+	});
 
 	var phone = req.params.p;
 	req.getConnection(function(err, connection){
@@ -93,7 +91,9 @@ exports.getByPhone = function(req, res){
 }
 
 exports.delete = function(req, res){
-	if(TokenGenerator.verifiesPermission(req.get("token"), profiles).err) return res.status(400).json(verify);
+	TokenGenerator.verifiesPermission(req.get("token"), profiles, function(err){
+		if(err) return res.status(400).json(err);
+	});
 
 	var id = req.params.p;
 	req.getConnection(function(err, connection){
@@ -110,7 +110,9 @@ exports.delete = function(req, res){
 }
 
 exports.update = function(req, res){
-	if(TokenGenerator.verifiesPermission(req.get("token"), profiles).err) return res.status(400).json(verify);
+	TokenGenerator.verifiesPermission(req.get("token"), profiles, function(err){
+		if(err) return res.status(400).json(err);
+	});
 
 	var id = req.params.p;
 	var data = req.body;
