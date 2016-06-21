@@ -24,7 +24,8 @@ var dbinfo = {
   port : 3306,
   database:'burgershop',
   ifNotExist:true,
-  backfile:'./backups/database.sql'
+  backfile:'./backups/database.sql',
+  tables:['clients', 'profiles', 'logins', 'order_sources', 'tables', 'orders', 'products', 'order_itens'],
 }
 
 var app = express();
