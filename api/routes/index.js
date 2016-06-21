@@ -46,4 +46,12 @@ router.route('/clients/:p')
 	router.route('/clients/phone/:p')
 	.get([Token.validtoken,Clients.getByPhone])
 
+router.route('/backup')
+		.get(function(req,res){
+			req.getConnDump(function(err){
+				if(err) return res.status(400).json(err);				
+				return res.status(200).json("{0}")
+			});
+})
+
 module.exports = router;

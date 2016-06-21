@@ -10,13 +10,17 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var mysql = require('mysql');
+var mysqlDump = require('mysqldump');
 var connection = require('express-myconnection');
+var connDump = getmodule('api_modules/conn-dump');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
+app.set('host', 'localhost');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -33,6 +37,18 @@ app.use(
      port : 3306, //port mysql
      database:'burgershop'
    },'request')
+);
+app.use(
+  connDump(mysqlDump,
+    {
+    	host: 'localhost',
+    	user: 'root',
+    	password: 'senha',
+    	database: 'burgershop',
+    	ifNotExist:true, // Create table if not exist
+    	dest:'./backups/database.sql' // destination file
+    }
+  )
 );
 
 app.use('/', routes);
