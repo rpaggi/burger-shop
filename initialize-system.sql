@@ -16,3 +16,9 @@ INSERT INTO logins VALUES(
   current_timestamp,
   current_timestamp
 );
+
+INSERT INTO order_sources VALUES(1, "Salão");
+INSERT INTO order_sources VALUES(2, "Balcão");
+INSERT INTO order_sources VALUES(3, "Delivery");
+INSERT INTO order_sources VALUES(4, "iFood");
+INSERT INTO order_sources VALUES(5, "Outros");
