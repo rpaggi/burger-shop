@@ -3,6 +3,7 @@ var router       = express.Router();
 var Profiles     = getmodule('models/profiles');
 var Logins       = getmodule('models/logins');
 var Tables       = getmodule('models/tables');
+var Orders       = getmodule('models/orders');
 var Clients      = getmodule('models/clients');
 var OrderSources = getmodule('models/order-sources');
 var Token        = getmodule('api_modules/token');
@@ -40,6 +41,14 @@ router.route('/tables/:p')
 	.get([Tables.perm,Token.validtoken,Tables.get])
 	.put([Tables.perm,Token.validtoken,Tables.update])
 	.delete([Tables.perm,Token.validtoken,Tables.delete])
+	.get([Logins.perm,Token.validtoken,Logins.getByUser])
+
+router.route('/orders')
+	.post([Orders.perm,Token.validtoken,Orders.add])
+router.route('/orders/:p')
+	.get([Orders.perm,Token.validtoken,Orders.get])
+	.put([Orders.perm,Token.validtoken,Orders.update])
+	.delete([Orders.perm,Token.validtoken,Orders.delete])
 
 router.route('/clients')
 	.post([Clients.perm,Token.validtoken,Clients.add])
