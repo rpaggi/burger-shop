@@ -2,7 +2,7 @@ var crypto = require('crypto');
 var TokenGenerator = getmodule('api_modules/token');
 
 exports.perm = function(req, res, next){
-	req.profiles = [1,2];
+	req.profiles = [1,2,3,4];
 	next();
 };
 
