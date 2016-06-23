@@ -9,6 +9,7 @@ module.exports = function(mysqlDump, dbConf){
     req.getConnDump = function(callback){
       var arr = dbConf.backfile.split(".");
       dbConf.dest = '.'+ arr[1] + getFormattedDate() + "." + arr[2]
+      dbConf.database = dbConf.db;
 
       mysqlDump(dbConf,function(err){
         if(err) return callback(err);

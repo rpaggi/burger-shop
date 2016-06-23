@@ -13,8 +13,8 @@
     "jade": "~1.11.0",
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",
-    "mysql": "~2.10.2",
-	  "express-myconnection": "~1.0.4",
+    "mariasql": "~0.2.6",
+	  "express-mariaconnection": "~0.0.1",
     "getmodule": "~1.0.0",
     "token-generator": "~1.0.0"
   }

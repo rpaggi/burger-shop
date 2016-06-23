@@ -13,16 +13,17 @@ var users = require('./routes/users');
 //  |==-- DATABASE MODULES AND INFORMATIONS --== |
 //  |==-- -------- ------- --- ------------ --== |
 
-var mysql = require('mysql');
+var mariadb = require('mariasql');
 var mysqlDump = require('mysqldump');
-var connection = require('express-myconnection');
+var connection = require('express-mariaconnection');
 var connDump = getmodule('api_modules/conn-dump');
 var dbinfo = {
   host: 'localhost',
   user: 'root',
   password : 'senha',
+  charset: 'utf8',
   port : 3306,
-  database:'burgershop',
+  db:'burgershop',
   ifNotExist:true,
   backfile:'./backups/database.sql',
   tables:['clients', 'profiles', 'logins', 'order_sources', 'tables', 'orders', 'products', 'order_itens'],
@@ -44,7 +45,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(
-   connection(mysql,dbinfo,'request')
+   connection(mariadb,dbinfo)
 );
 app.use(
   connDump(mysqlDump,dbinfo)
