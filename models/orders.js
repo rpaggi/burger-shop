@@ -1,5 +1,6 @@
 var crypto = require('crypto');
 var TokenGenerator = getmodule('api_modules/token');
+var jerror = getmodule('api_modules/json-error');
 
 exports.perm = function(req, res, next){
 	req.profiles = [1,2,3,4];
@@ -19,16 +20,16 @@ exports.add = function(req, res){
 	}
 
 	req.getConnection(function(err,connection){
-		if(err) return res.status(400).json(err);
+		if(jerror(err)) return res.status(400).json(jerror(err));
 
     connection.query('SELECT id FROM logins WHERE user = ?', [data.user], function(err,result){
-      if(err) return res.status(400).json(err);
+      if(jerror(err)) return res.status(400).json(jerror(err));
 
       if(Object.keys(result).length > 0){
         delete data.user;
         data.user_id = result[0].id;
         connection.query('INSERT INTO orders SET ?;',[data],function(err,result){
-    			if(err) return res.status(400).json(err);
+    			if(jerror(err)) return res.status(400).json(jerror(err));
 
     			return res.status(200).json(result);
     		});
@@ -43,13 +44,13 @@ exports.add = function(req, res){
 exports.get = function(req, res){
 	var id = req.params.p;
 	req.getConnection(function(err, connection){
-		if(err) return res.status(400).json(err);
+		if(jerror(err)) return res.status(400).json(jerror(err));
 
 		connection.query(
 			'SELECT * FROM orders WHERE id = ?',
 			[id],
 			function(err, result){
-				if (err) return res.status(400).json(err);
+				if (jerror(err)) return res.status(400).json(jerror(err));
 
 				return res.status(200).json(result);
 			}
@@ -61,13 +62,13 @@ exports.delete = function(req, res){
 
 	var id = req.params.p;
 	req.getConnection(function(err, connection){
-		if(err) return res.status(400).json(err);
+		if(jerror(err)) return res.status(400).json(jerror(err));
 
 		connection.query(
 			'DELETE FROM orders WHERE id = ?',
 			[id],
 			function(err, result){
-				if (err) return res.status(400).json(err);
+				if (jerror(err)) return res.status(400).json(jerror(err));
 
 				return res.status(200).json(result);
 			}
@@ -81,7 +82,7 @@ exports.update = function(req, res){
 	var data = req.body;
 
   req.getConnection(function(err, connection){
-		if(err) return res.status(400).json(err);
+		if(jerror(err)) return res.status(400).json(jerror(err));
 
     if(data.user == null) data.user="";
 
@@ -95,7 +96,8 @@ exports.update = function(req, res){
         'UPDATE orders SET ? WHERE id = ?',
         [data, id],
         function(err, result){
-          if (err) return res.status(400).json(err);
+					console.log(jerror(jerror(err)));
+          if (jerror(err)) return res.status(400).json(jerror(err));
 
           return res.status(200).json(result);
         }
