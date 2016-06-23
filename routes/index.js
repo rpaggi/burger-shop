@@ -20,9 +20,9 @@ router.route('/profiles/:id')
 	.get([Profiles.perm,Token.validtoken,Profiles.get])
 
 	router.route('/order-sources')
-		.get([Profiles.perm,Token.validtoken, Profiles.all])
+		.get([OrderSources.perm,Token.validtoken, OrderSources.all])
 	router.route('/order-sources/:id')
-		.get([Profiles.perm,Token.validtoken,Profiles.get])
+		.get([OrderSources.perm,Token.validtoken,OrderSources.get])
 
 router.route('/login')
 	.post(Logins.do)
