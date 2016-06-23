@@ -83,10 +83,10 @@ exports.update = function(req, res){
   req.getConnection(function(err, connection){
 		if(err) return res.status(400).json(err);
 
-    if(data.user = null) data.user="";
+    if(data.user == null) data.user="";
 
     connection.query('SELECT id FROM logins WHERE user = ?', [data.user], function(err,result){
-      if(Object.keys(result).length > 0){
+      if(Object.keys(result).length > 1){
         data.user_id = result[0].id;
       }
       delete data.user;
