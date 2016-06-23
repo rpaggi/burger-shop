@@ -24,6 +24,8 @@ exports.add = function(req, res){
 	var data = req.body;
 
 	req.getConnection(function(err,connection){
+		if(err) return res.status(400).json(err);
+
 		connection.query('INSERT INTO tables SET ?;',[data],function(err,result){
 			if(err) return res.status(400).json(err);
 
@@ -39,6 +41,8 @@ exports.get = function(req, res){
 
 	var id = req.params.p;
 	req.getConnection(function(err, connection){
+		if(err) return res.status(400).json(err);
+
 		connection.query(
 			'SELECT * FROM tables WHERE id = ?',
 			[id],
@@ -58,6 +62,8 @@ exports.delete = function(req, res){
 
 	var id = req.params.p;
 	req.getConnection(function(err, connection){
+		if(err) return res.status(400).json(err);
+
 		connection.query(
 			'DELETE FROM tables WHERE id = ?',
 			[id],
@@ -79,6 +85,8 @@ exports.update = function(req, res){
 	var data = req.body;
 
 	req.getConnection(function(err, connection){
+		if(err) return res.status(400).json(err);
+
 		connection.query(
 			'UPDATE tables SET ? WHERE id = ?',
 			[data, id],

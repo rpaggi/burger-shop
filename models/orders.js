@@ -19,6 +19,8 @@ exports.add = function(req, res){
 	}
 
 	req.getConnection(function(err,connection){
+		if(err) return res.status(400).json(err);
+
     connection.query('SELECT id FROM logins WHERE user = ?', [data.user], function(err,result){
       if(err) return res.status(400).json(err);
 
@@ -41,6 +43,8 @@ exports.add = function(req, res){
 exports.get = function(req, res){
 	var id = req.params.p;
 	req.getConnection(function(err, connection){
+		if(err) return res.status(400).json(err);
+
 		connection.query(
 			'SELECT * FROM orders WHERE id = ?',
 			[id],
@@ -57,6 +61,8 @@ exports.delete = function(req, res){
 
 	var id = req.params.p;
 	req.getConnection(function(err, connection){
+		if(err) return res.status(400).json(err);
+
 		connection.query(
 			'DELETE FROM orders WHERE id = ?',
 			[id],
@@ -75,6 +81,7 @@ exports.update = function(req, res){
 	var data = req.body;
 
   req.getConnection(function(err, connection){
+		if(err) return res.status(400).json(err);
 
     if(data.user = null) data.user="";
 

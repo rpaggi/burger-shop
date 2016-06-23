@@ -7,10 +7,6 @@ exports.perm = function(req, res, next){
 };
 
 exports.add = function(req, res){
-	TokenGenerator.verifiesPermission(req.get("token"), profiles, function(err){
-		if(err) return res.status(400).json(err);
-	});
-
 	var data = req.body;
 
 	if(data.name == null || data.name == ""){
@@ -44,6 +40,8 @@ exports.add = function(req, res){
 	var data = req.body;
 
 	req.getConnection(function(err,connection){
+		if(err) return res.status(400).json(err);
+
 		connection.query('INSERT INTO clients SET ?;',[data],function(err,result){
 			if(err) return res.status(400).json(err);
 
@@ -53,12 +51,9 @@ exports.add = function(req, res){
 }
 
 exports.get = function(req, res){
-	TokenGenerator.verifiesPermission(req.get("token"), profiles, function(err){
-		if(err) return res.status(400).json(err);
-	});
-
 	var id = req.params.p;
 	req.getConnection(function(err, connection){
+		if(err) return res.status(400).json(err);
 		connection.query(
 			'SELECT * FROM clients WHERE id = ?',
 			[id],
@@ -72,12 +67,10 @@ exports.get = function(req, res){
 }
 
 exports.getByPhone = function(req, res){
-	TokenGenerator.verifiesPermission(req.get("token"), profiles, function(err){
-		if(err) return res.status(400).json(err);
-	});
-
 	var phone = req.params.p;
 	req.getConnection(function(err, connection){
+		if(err) return res.status(400).json(err);
+
 		connection.query(
 			'SELECT * FROM clients WHERE phone1 = ?',
 			[phone],
@@ -91,12 +84,10 @@ exports.getByPhone = function(req, res){
 }
 
 exports.delete = function(req, res){
-	TokenGenerator.verifiesPermission(req.get("token"), profiles, function(err){
-		if(err) return res.status(400).json(err);
-	});
-
 	var id = req.params.p;
 	req.getConnection(function(err, connection){
+		if(err) return res.status(400).json(err);
+
 		connection.query(
 			'DELETE FROM clients WHERE id = ?',
 			[id],
@@ -110,14 +101,12 @@ exports.delete = function(req, res){
 }
 
 exports.update = function(req, res){
-	TokenGenerator.verifiesPermission(req.get("token"), profiles, function(err){
-		if(err) return res.status(400).json(err);
-	});
-
 	var id = req.params.p;
 	var data = req.body;
 
 	req.getConnection(function(err, connection){
+		if(err) return res.status(400).json(err);
+		
 		connection.query(
 			'UPDATE clients SET ? WHERE id = ?',
 			[data, id],
