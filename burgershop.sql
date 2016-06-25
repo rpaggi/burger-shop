@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `order_itens` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
-  `note` varchar(150) NOT NULL,
+  `note` varchar(150) DEFAULT NULL,
   `hincl` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `order_itens_orders` (`order_id`),
