@@ -32,19 +32,19 @@ CREATE TABLE IF NOT EXISTS `logins` (
   `profile` int(11) NOT NULL,
   `token` varchar(50) DEFAULT NULL,
   `last_login` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `hincl` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `hincl` timestamp NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNI` (`user`),
   KEY `INDEX1` (`id`),
   KEY `FK_logins_profiles` (`profile`),
   CONSTRAINT `FK_logins_profiles` FOREIGN KEY (`profile`) REFERENCES `profiles` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `order_sources` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `tables` (
   `id` int(11) NOT NULL,
