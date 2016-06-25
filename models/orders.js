@@ -1,5 +1,3 @@
-var crypto = require('crypto');
-var TokenGenerator = getmodule('api_modules/token');
 var jerror = getmodule('api_modules/json-error');
 
 exports.perm = function(req, res, next){
