@@ -6,6 +6,8 @@ var Tables       = getmodule('models/tables');
 var Orders       = getmodule('models/orders');
 var Clients      = getmodule('models/clients');
 var OrderSources = getmodule('models/order-sources');
+var Products     = getmodule('models/products');
+var OrderItens   = getmodule('models/order-itens');
 var Token        = getmodule('api_modules/token');
 var Backup       = getmodule('api_modules/backup');
 
@@ -19,10 +21,10 @@ router.route('/profiles')
 router.route('/profiles/:id')
 	.get([Profiles.perm,Token.validtoken,Profiles.get])
 
-	router.route('/order-sources')
-		.get([OrderSources.perm,Token.validtoken, OrderSources.all])
-	router.route('/order-sources/:id')
-		.get([OrderSources.perm,Token.validtoken,OrderSources.get])
+router.route('/order-sources')
+	.get([OrderSources.perm,Token.validtoken, OrderSources.all])
+router.route('/order-sources/:id')
+	.get([OrderSources.perm,Token.validtoken,OrderSources.get])
 
 router.route('/login')
 	.post(Logins.do)
@@ -41,7 +43,20 @@ router.route('/tables/:p')
 	.get([Tables.perm,Token.validtoken,Tables.get])
 	.put([Tables.perm,Token.validtoken,Tables.update])
 	.delete([Tables.perm,Token.validtoken,Tables.delete])
-	.get([Logins.perm,Token.validtoken,Logins.getByUser])
+
+router.route('/products')
+	.post([Products.perm,Token.validtoken,Products.add])
+router.route('/products/:p')
+	.get([Products.perm,Token.validtoken,Products.get])
+	.put([Products.perm,Token.validtoken,Products.update])
+	.delete([Products.perm,Token.validtoken,Products.delete])
+
+router.route('/order-itens')
+	.post([OrderItens.perm,Token.validtoken,OrderItens.add])
+router.route('/order-itens/:p')
+	.get([OrderItens.perm,Token.validtoken,OrderItens.get])
+	.put([OrderItens.perm,Token.validtoken,OrderItens.update])
+	.delete([OrderItens.perm,Token.validtoken,OrderItens.delete])
 
 router.route('/orders')
 	.post([Orders.perm,Token.validtoken,Orders.add])
