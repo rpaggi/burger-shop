@@ -1,16 +1,9 @@
-var crypto = require('crypto');
-var TokenGenerator = getmodule('api_modules/token');
-
 exports.perm = function(req, res, next){
 	req.profiles = [1,2,3,4];
 	next();
 };
 
 exports.add = function(req, res){
-	TokenGenerator.verifiesPermission(req.get("token"), profiles, function(err){
-		if(err) return res.status(400).json(err);
-	});
-
 	var data = req.body;
 
 	if(isNaN(data.id) || data.id == 0){
@@ -35,10 +28,6 @@ exports.add = function(req, res){
 }
 
 exports.get = function(req, res){
-	TokenGenerator.verifiesPermission(req.get("token"), profiles, function(err){
-		if(err) return res.status(400).json(err);
-	});
-
 	var id = req.params.p;
 	req.getConnection(function(err, connection){
 		if(err) return res.status(400).json(err);
@@ -56,10 +45,6 @@ exports.get = function(req, res){
 }
 
 exports.delete = function(req, res){
-	TokenGenerator.verifiesPermission(req.get("token"), profiles, function(err){
-		if(err) return res.status(400).json(err);
-	});
-
 	var id = req.params.p;
 	req.getConnection(function(err, connection){
 		if(err) return res.status(400).json(err);
@@ -77,10 +62,6 @@ exports.delete = function(req, res){
 }
 
 exports.update = function(req, res){
-	TokenGenerator.verifiesPermission(req.get("token"), profiles, function(err){
-		if(err) return res.status(400).json(err);
-	});
-
 	var id = req.params.p;
 	var data = req.body;
 
