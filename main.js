@@ -5,6 +5,18 @@ const BrowserWindow = electron.BrowserWindow
 
 let mainWindow
 
+// In main process.
+// const {ipcMain} = require('electron');
+// ipcMain.on('asynchronous-message', (event, arg) => {
+//   console.log(arg);  // prints "ping"
+//   event.sender.send('asynchronous-reply', 'pong');
+// });
+//
+// ipcMain.on('synchronous-message', (event, arg) => {
+//   console.log(arg);  // prints "ping"
+//   event.returnValue = 'pong';
+// })
+
 function inArray(a, t){
   for (var i = 0; i < a.length && a[i] !== t; i++) {
 
@@ -28,9 +40,9 @@ function createWindow () {
   const menu = new Menu();
   menu.append(
     new MenuItem({
-      label: 'Home',
+      label: 'Produtos',
       submenu:[{
-        label: "Home1"
+        label: "Novo", click(){mainWindow.webContents.send('menu', 'product-add');}
       },
       {
         label: "Home2"

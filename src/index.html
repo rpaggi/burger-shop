@@ -7,52 +7,21 @@
 
 	<title>BurgerShop</title>
 
+	<link rel="stylesheet" href="assets/css/materialize.min.css" />
+	<link rel="stylesheet" href="assets/css/main.css" />
 	<script> require ('angular'); </script>
-	
-	<style type="text/css" media="screen">
-		*{
-			margin: 0;
-		}
 
-		body{
-			background: #CCC;
-			color: #333;
-			font-family: "Trebuchet MS";
-		}
-
-		content{
-			width: 100%;
-		}
-
-		content h1{
-			margin: 0.3em 0 0 0.3em;
-		}
-
-		footer {
-		    position: absolute;
-		    z-index: 10;
-		    bottom: 0;
-		    height: 1em;
-		    width: 100%;
-			background: #AAA;
-			text-align: right;
-			font-size: 0.8em;
-			padding: 0.2em 0.5em 0.2em 0em;
-			margin-left: -0.5em
-		}
-
-	</style>
 </head>
-<body ng-app>
+<body ng-app="app" data-ng-controller="ApplicationController as Application">
 	<header>
-
 	</header>
-	<content>
-		<h1>BugerShop</h1>
-		<p>{{ 2+2 }}</p>
+	<content ng-include="" src="Application.templateUrl">
 	</content>
 	<footer>
-		BurgerShop - Versão 1.0 - Licenciado para InRock Burger
+		BurgerShop - Versão 1.0
 	</footer>
+
+	<script src="controllers/app.js"></script>
+	<script src="assets/js/menu.js"></script>
 </body>
 </html>
