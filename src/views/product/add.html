@@ -1,3 +1,15 @@
 <div data-ng-controller="ProductController as Product">
-  <h1>Adicionar produto</h1>  
+  <h1>Adicionar produto</h1>
+  
+  <form name="productForm">
+    <div data-ng-class="{'invalid' : productForm.name.$invalid}">
+      Nome: <input type="text" name="name" data-ng-model="Product.name" placeholder="Nome" required>
+    </div>
+    <div>
+      Descrição: <input type="text" name="description" data-ng-model="Product.description" placeholder="Description">
+    </div>
+    <div data-ng-class="{'invalid' : productForm.valueSell.$invalid}">
+      Valor de venda: <input type="text" name="valueSell" data-ng-model="Product.valueSell" placeholder="Valor de Venda" required>
+    </div>
+  </form>
 </div>
