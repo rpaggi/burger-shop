@@ -40,25 +40,19 @@ function createWindow () {
   const menu = new Menu();
   menu.append(
     new MenuItem({
-      label: 'Produtos',
+      label: '&Produtos',
       submenu:[{
-        label: "Novo", click(){mainWindow.webContents.send('menu', 'product-add');}
-      },
-      {
-        label: "Home2"
-      },
-      {
-        label: "Home3"
+        label: "&Novo", click(){mainWindow.webContents.send('menu', 'product-add');}
       }]
     }
   ));
   if(inArray(process.argv, "-debug"))
     menu.append(
       new MenuItem(
-        {label: 'Test',
+        {label: '&Test',
           submenu:[
-          {label: "Refresh", accelerator: "F5", role: "Home1", click(){ mainWindow.reload()}},
-          {label: "DevTools",accelerator: "F12",click(){ mainWindow.webContents.openDevTools()}},
+          {label: "&Refresh", accelerator: "F5", role: "Home1", click(){ mainWindow.reload()}},
+          {label: "&DevTools",accelerator: "F12",click(){ mainWindow.webContents.openDevTools()}},
           {label: "&Quit", accelerator: "CmdOrCtrl+W", role: "Home1",click(){ app.quit();}}
         ]
       })
