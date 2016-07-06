@@ -2,6 +2,28 @@
   margin: 0;
 }
 
+header .message{
+  height: 3em;
+  transition: all linear 0.05s;
+}
+
+header .message .close{
+  width: 1.5em;
+  height: 1.5em;
+  font-size: 0.8em;
+  text-align: center;
+  float: right;
+}
+
+header .ng-hide{
+  height: 0;
+
+}
+
+header .message span{
+  width: 100%;
+}
+
 body{
   background: #CCC;
   color: #333;

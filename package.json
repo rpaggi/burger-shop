@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "angular": "^1.5.6",
+    "angular-animate": "^1.5.7",
     "node-correios": "^2.1.1"
   }
 }
