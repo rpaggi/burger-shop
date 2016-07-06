@@ -5,6 +5,8 @@
 header .message{
   height: 3em;
   transition: all linear 0.05s;
+  position: absolute;
+  top: 1em;
 }
 
 header .message .close{

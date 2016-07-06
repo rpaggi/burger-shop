@@ -15,7 +15,7 @@
 </head>
 <body ng-app="app" data-ng-controller="ApplicationController as Application">
 	<header class="row">
-		<div data-ng-controller="MessageBoxController as MessageBox" class="message col s8 offset-s2 card-panel lighten-4 valign-wrapper {{MessageBox.color}}" ng-show="MessageBox.show">
+		<div data-ng-controller="MessageBoxController as MessageBox" class="message col s8 offset-s3 card-panel lighten-4 valign-wrapper {{MessageBox.color}}" ng-show="MessageBox.show">
 			<span class="center-align text-darken-4 {{MessageBox.color}}-text">{{MessageBox.text}}</span>
 			<div class="close {{MessageBox.color}} lighten-2">
 				<a class="text-darken-4 {{MessageBox.color}}-text" href="" data-ng-click="MessageBox.toogle()">X</a>
