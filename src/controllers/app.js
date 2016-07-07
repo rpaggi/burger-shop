@@ -7,6 +7,10 @@ function  ApplicationController(){
   vm.templateUrl = 'views/home.html'; //Default templateUrl
   vm.contentTitle = '';
 
+  vm.setTemplateUrl = function(url){
+    vm.templateUrl = url;
+  }
+
   //var messageBox = angular.element( document.querySelector( '.message' ) );
   //messageBox.addClass();
 }

@@ -1,17 +1,24 @@
 app.controller('ProductController', ['$http', 'Scopes', function($http, Scopes){
   var vm = this;
   var messageBox  = Scopes.get('MessageBoxController');
-  vm.name = ""
-  vm.description = ""
+  vm.id = Scopes.get('ProductID');
+  vm.name = "";
+  vm.description = "";
   vm.valueSell = "0,00";
+  vm.hincl = "";
+  vm.disabled = false;
+
+  vm.products = [];
 
   $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
   var config = {headers: {'token':app.token}};
 
   function _cleanFields(){
+    vm.id = 0
     vm.name = ""
     vm.description = ""
     vm.valueSell = "0,00";
+    vm.hincl = ""
   }
 
   vm.add = function(){
@@ -33,8 +40,6 @@ app.controller('ProductController', ['$http', 'Scopes', function($http, Scopes){
     });
   }
 
-  vm.products = [];
-
   vm.getAll = function(){
     $http.get('http://localhost:3000/products', config)
     .then(function(response){
@@ -45,5 +50,39 @@ app.controller('ProductController', ['$http', 'Scopes', function($http, Scopes){
       console.log("response status = " + response.status);
       messageBox.error('PROD0003');
     });
+  }
+
+  vm.preDetail = function(id){
+    Scopes.store("ProductID", id);
+  }
+
+  vm.loadProduct = function(){
+    $http.get('http://localhost:3000/products/'+vm.id, config)
+    .then(function(response){
+      vm.id = response.data[0].id;
+      vm.name = response.data[0].name;
+      vm.description = response.data[0].description;
+      vm.valueSell = response.data[0].value_sell;
+      vm.hincl = response.data[0].hincl;
+    }, function (response){
+      console.log("!!!error!!!");
+      console.log(JSON.stringify(response.data));
+      console.log("response status = " + response.status);
+      messageBox.error('PROD0003');
+    });
+  }
+
+  vm.delete = function(setTemplateUrl){
+    if(confirm('Você tem certeza?')){
+      $http.delete('http://localhost:3000/products/'+vm.id, config)
+      .then(function(response){
+        setTemplateUrl("views/product/consult.html");
+      }, function (response){
+        console.log("!!!error!!!");
+        console.log(JSON.stringify(response.data));
+        console.log("response status = " + response.status);
+        messageBox.error('PROD0003');
+      });
+    }
   }
 }]);

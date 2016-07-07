@@ -1,5 +1,7 @@
 <div data-ng-controller="ProductController as Product" data-ng-init="Product.getAll(); Application.contentTitle='Consultar Produtos'" class="row">
-  <label class="col s10 offset-s1"><input ng-model="searchProd" class="grey-text-placehoder grey-text text-darken-2" placeholder="Buscar produto" autofocus></label>
+  <div class="col s10 offset-s1">
+    <input ng-model="searchProd" class="grey-text-placehoder grey-text text-darken-2" placeholder="Buscar produto" autofocus>
+  </div>
   <div class="table-scroll col s12">
     <table class="responsive-table highlight">
       <thead>
@@ -10,7 +12,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr data-ng-repeat="product in Product.products | filter:searchProd">
+        <tr data-ng-repeat="product in Product.products | filter:searchProd" data-ng-click="Product.preDetail(product.id); Application.templateUrl='views/product/detail.html'">
           <td>{{product.name}}</td>
           <td>{{product.description}}</td>
           <td class=right-align>R$ {{product.value_sell.replace('.', ',')}}</td>
