@@ -15,7 +15,7 @@
         <tr data-ng-repeat="product in Product.products | filter:searchProd">
           <td>{{product.name}}</td>
           <td>{{product.description}}</td>
-          <td class=right-align>{{product.value_sell.replace('.', ',')}}</td>
+          <td class=right-align>R$ {{product.value_sell.replace('.', ',')}}</td>
         </tr>
       </tbody>
     </table>

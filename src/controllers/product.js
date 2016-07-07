@@ -17,7 +17,8 @@ app.controller('ProductController', ['$http', 'Scopes', function($http, Scopes){
   vm.add = function(){
     var data = "name="+vm.name+
                "&description="+vm.description+
-               "&value_sell="+vm.valueSell.replace(/,/g, '.');
+               "&value_sell="+vm.valueSell//.replace(/,/g, '.');
+
 
     $http.post('http://localhost:3000/products', data, config)
     .then(function(response){
@@ -33,7 +34,7 @@ app.controller('ProductController', ['$http', 'Scopes', function($http, Scopes){
   }
 
   vm.products = [];
-  
+
   vm.getAll = function(){
     $http.get('http://localhost:3000/products', config)
     .then(function(response){

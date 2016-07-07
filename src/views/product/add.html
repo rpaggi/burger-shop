@@ -1,4 +1,4 @@
-<div data-ng-controller="ProductController as Product">
+<div data-ng-controller="ProductController as Product" class="row">
   <h1>Adicionar produto</h1>
 
   <form name="productForm">
@@ -9,10 +9,10 @@
       Descrição: <input type="text" name="description" data-ng-model="Product.description" placeholder="Description">
     </div>
     <div data-ng-class="{'invalid' : productForm.valueSell.$invalid}">
-      Valor de venda: <input type="text" name="valueSell" data-ng-model="Product.valueSell" ui-br-number-mask placeholder="Valor de Venda" required>
+      Valor de venda: <input type="text" name="valueSell" data-ng-model="Product.valueSell" ui-money-mask="2" placeholder="Valor de Venda" required onfocus="this.value = this.value;">
     </div>
-    <div>
-      <button type="button" name="Cadastrar" data-ng-click="Product.add()">Cadastrar</button>
+    <div class="col s2 offset-s5">
+      <button class="btn btn-large green waves-effect waves-light" type="button" name="Cadastrar" data-ng-click="Product.add()">Cadastrar</button>
     </div>
   </form>
 </div>

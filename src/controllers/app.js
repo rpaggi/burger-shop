@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngAnimate', require('angular-input-masks')]);
+var app = angular.module('app', ['ngAnimate', require('angular-input-masks/br')]);
 app.controller('ApplicationController', ApplicationController);
 app.token = '5bbb1eggie145e1';
 
