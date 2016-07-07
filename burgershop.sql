@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS `clients` (
   `zipcode` int(11) DEFAULT NULL,
   `phone1` int(11) NOT NULL,
   `phone2` int(11) DEFAULT NULL,
-  `hincl` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `hincl` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_key` (`phone1`),
   KEY `index_id` (`id`),
@@ -32,19 +32,19 @@ CREATE TABLE IF NOT EXISTS `logins` (
   `profile` int(11) NOT NULL,
   `token` varchar(50) DEFAULT NULL,
   `last_login` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `hincl` timestamp NOT NULL,
+  `hincl` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNI` (`user`),
   KEY `INDEX1` (`id`),
   KEY `FK_logins_profiles` (`profile`),
   CONSTRAINT `FK_logins_profiles` FOREIGN KEY (`profile`) REFERENCES `profiles` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `order_sources` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `tables` (
   `id` int(11) NOT NULL,
@@ -58,8 +58,9 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `order_source` int(11) NOT NULL,
   `table_id` int(11) DEFAULT NULL,
   `client_id` int(11) DEFAULT NULL,
+  `note` varchar(150) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `hincl` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `hincl` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `orders_clients` (`client_id`),
   KEY `orders_logins` (`user_id`),
@@ -69,26 +70,25 @@ CREATE TABLE IF NOT EXISTS `orders` (
   CONSTRAINT `orders_logins` FOREIGN KEY (`user_id`) REFERENCES `logins` (`id`),
   CONSTRAINT `orders_order_sources` FOREIGN KEY (`order_source`) REFERENCES `order_sources` (`id`),
   CONSTRAINT `orders_tables` FOREIGN KEY (`table_id`) REFERENCES `tables` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `products` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `description` varchar(500) DEFAULT NULL,
   `value_sell` double(8,2) NOT NULL,
-  `hincl` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `hincl` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `index_id` (`id`),
   KEY `index_name` (`name`),
   KEY `index_value_sell` (`value_sell`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `order_itens` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
-  `note` varchar(150) DEFAULT NULL,
-  `hincl` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `hincl` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `order_itens_orders` (`order_id`),
   KEY `order_itens_products` (`product_id`),
