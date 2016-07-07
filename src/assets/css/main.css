@@ -35,6 +35,12 @@ body{
 content{
   width: 100%;
 }
+
+content .main{
+  overflow: auto;
+  height:40em;
+}
+
 content form{
   width: 96%;
   margin: 0 auto;
