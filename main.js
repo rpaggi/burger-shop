@@ -41,11 +41,12 @@ function createWindow () {
   menu.append(
     new MenuItem({
       label: '&Produtos',
-      submenu:[{
-        label: "&Novo", click(){mainWindow.webContents.send('menu', 'product-add');}
-      }]
-    }
-  ));
+      submenu:[
+        {label: "&Consultar", click(){mainWindow.webContents.send('menu', 'product-consult')}},
+        {label: "&Novo", click(){mainWindow.webContents.send('menu', 'product-add');}}
+      ]
+    })
+  );
   if(inArray(process.argv, "-debug"))
     menu.append(
       new MenuItem(

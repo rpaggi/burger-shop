@@ -11,6 +11,9 @@ ipcRenderer.on('menu', (event, arg) => {
     case 'product-add':
       setUrl("views/product/add.html");
       break;
+    case 'product-consult':
+      setUrl("views/product/consult.html");
+      break;
     default:
       setUrl("views/home.html");
       break;

@@ -9,7 +9,7 @@
       Descrição: <input type="text" name="description" data-ng-model="Product.description" placeholder="Description">
     </div>
     <div data-ng-class="{'invalid' : productForm.valueSell.$invalid}">
-      Valor de venda: <input type="text" name="valueSell" data-ng-model="Product.valueSell" placeholder="Valor de Venda" required>
+      Valor de venda: <input type="text" name="valueSell" data-ng-model="Product.valueSell" ui-br-number-mask placeholder="Valor de Venda" required>
     </div>
     <div>
       <button type="button" name="Cadastrar" data-ng-click="Product.add()">Cadastrar</button>

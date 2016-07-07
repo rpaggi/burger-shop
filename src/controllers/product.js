@@ -6,6 +6,7 @@ app.controller('ProductController', ['$http', 'Scopes', function($http, Scopes){
   vm.valueSell = "0,00";
 
   $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+  var config = {headers: {'token':app.token}};
 
   function _cleanFields(){
     vm.name = ""
@@ -18,8 +19,6 @@ app.controller('ProductController', ['$http', 'Scopes', function($http, Scopes){
                "&description="+vm.description+
                "&value_sell="+vm.valueSell.replace(/,/g, '.');
 
-    var config = {headers: {'token':app.token}};
-
     $http.post('http://localhost:3000/products', data, config)
     .then(function(response){
       console.log(response);
@@ -30,6 +29,20 @@ app.controller('ProductController', ['$http', 'Scopes', function($http, Scopes){
       console.log(JSON.stringify(response.data));
       console.log("response status = " + response.status);
       messageBox.error('PROD0002');
+    });
+  }
+
+  vm.products = [];
+  
+  vm.getAll = function(){
+    $http.get('http://localhost:3000/products', config)
+    .then(function(response){
+      vm.products = sortJson(response.data, 'name', true);
+    }, function (response){
+      console.log("!!!error!!!");
+      console.log(JSON.stringify(response.data));
+      console.log("response status = " + response.status);
+      messageBox.error('PROD0003');
     });
   }
 }]);

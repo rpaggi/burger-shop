@@ -1,0 +1,23 @@
+<div data-ng-controller="ProductController as Product" data-ng-init="Product.getAll()" class="row">
+  <h1>Consultar produtos</h1>
+
+  <label class="col s10 offset-s1"><input ng-model="searchProd" class="grey-text-placehoder grey-text text-darken-2" placeholder="Buscar produto"></label>
+  <div class="table-scroll col s12">
+    <table class="responsive-table highlight">
+      <thead>
+        <tr>
+          <th data-field="name">Nome</th>
+          <th data-field="description">Descrição</th>
+          <th data-field="value_sell">Preço</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-ng-repeat="product in Product.products | filter:searchProd">
+          <td>{{product.name}}</td>
+          <td>{{product.description}}</td>
+          <td class=right-align>{{product.value_sell.replace('.', ',')}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
