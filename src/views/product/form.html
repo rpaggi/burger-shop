@@ -1,7 +1,7 @@
 <form name="productForm">
   <div data-ng-class="{'invalid' : productForm.name.$invalid}" class="input-margin">
     <label for="name">Nome</label>
-    <input ng-disabled="Product.disabled" type="text" id="name" data-ng-model="Product.name" placeholder="Nome" required autofocus>
+    <input autofocus ng-disabled="Product.disabled" type="text" id="name" data-ng-model="Product.name" placeholder="Nome" required>
   </div>
   <div class="input-margin">
     <label for="description">Descrição</label>

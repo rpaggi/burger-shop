@@ -11,6 +11,7 @@ app.controller('ProductController', ['$http', 'Scopes', function($http, Scopes){
   vm.products = [];
 
   $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+  $http.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
   var config = {headers: {'token':app.token}};
 
   function _cleanFields(){
@@ -81,7 +82,28 @@ app.controller('ProductController', ['$http', 'Scopes', function($http, Scopes){
         console.log("!!!error!!!");
         console.log(JSON.stringify(response.data));
         console.log("response status = " + response.status);
-        messageBox.error('PROD0003');
+        messageBox.error('PROD0006');
+      });
+    }
+  }
+
+  vm.save = function(setTemplateUrl){
+    var data = "name="+vm.name+
+               "&description="+vm.description+
+               "&value_sell="+vm.valueSell//.replace(/,/g, '.');
+
+    console.log(data);
+
+    if(confirm('Você tem certeza?')){
+      $http.put('http://localhost:3000/products/'+vm.id, data, config)
+      .then(function(response){
+        messageBox.sucess('PROD0004');
+        vm.disabled = true;
+      }, function (response){
+        console.log("!!!error!!!");
+        console.log(JSON.stringify(response.data));
+        console.log("response status = " + response.status);
+        messageBox.error('PROD0005');
       });
     }
   }

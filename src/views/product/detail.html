@@ -10,7 +10,7 @@
     </div>
     <div id="right-buttons" class="col s6">
       <button class="btn btn-large blue waves-effect waves-light right" type="button" name="Alterar" ng-disabled="!Product.disabled" data-ng-click="Product.disabled=false">Alterar</button>
-      <button class="btn btn-large green waves-effect waves-light right" type="button" name="Alterar" ng-disabled="Product.disabled" data-ng-click="Product.disabled=true">Salvar</button>
+      <button class="btn btn-large green waves-effect waves-light right" type="button" name="Alterar" ng-disabled="Product.disabled" data-ng-click="Product.save()">Salvar</button>
       <button class="btn btn-large red waves-effect waves-light right" type="button" name="Deletar" data-ng-click="Product.delete(Application.setTemplateUrl);">Deletar</button>
     </div>
   </div>
