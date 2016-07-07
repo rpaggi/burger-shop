@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `logins` (
   `profile` int(11) NOT NULL,
   `token` varchar(50) DEFAULT NULL,
   `last_login` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `hincl` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `hincl` timestamp NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNI` (`user`),
   KEY `INDEX1` (`id`),
@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `products_details` (
   PRIMARY KEY (`id`),
   KEY `index_id` (`id`),
   KEY `index_name` (`name`),
-  CONSTRAINT `order_itens_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
+  CONSTRAINT `products_details_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `order_itens` (
