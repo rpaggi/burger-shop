@@ -1,15 +1,16 @@
-var express      = require('express');
-var router       = express.Router();
-var Profiles     = getmodule('models/profiles');
-var Logins       = getmodule('models/logins');
-var Tables       = getmodule('models/tables');
-var Orders       = getmodule('models/orders');
-var Clients      = getmodule('models/clients');
-var OrderSources = getmodule('models/order-sources');
-var Products     = getmodule('models/products');
-var OrderItens   = getmodule('models/order-itens');
-var Token        = getmodule('api_modules/token');
-var Backup       = getmodule('api_modules/backup');
+var express         = require('express');
+var router          = express.Router();
+var Profiles        = getmodule('models/profiles');
+var Logins          = getmodule('models/logins');
+var Tables          = getmodule('models/tables');
+var Orders          = getmodule('models/orders');
+var Clients         = getmodule('models/clients');
+var OrderSources    = getmodule('models/order-sources');
+var Products        = getmodule('models/products');
+var ProductsDetails = getmodule('models/products-detais');
+var OrderItens      = getmodule('models/order-itens');
+var Token           = getmodule('api_modules/token');
+var Backup          = getmodule('api_modules/backup');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -51,6 +52,15 @@ router.route('/products/:p')
 	.get([Products.perm,Token.validtoken,Products.get])
 	.put([Products.perm,Token.validtoken,Products.update])
 	.delete([Products.perm,Token.validtoken,Products.delete])
+
+router.route('/products-datails')
+	.post([ProductsDetails.perm,Token.validtoken,ProductsDetails.add])
+router.route('/products-datails/:p')
+	.get([ProductsDetails.perm,Token.validtoken,ProductsDetails.get])
+	.put([ProductsDetails.perm,Token.validtoken,ProductsDetails.update])
+	.delete([ProductsDetails.perm,Token.validtoken,ProductsDetails.delete])
+	router.route('/products-datails/product/:p')
+	.get([ProductsDetails.perm,Token.validtoken,ProductsDetails.getProduct])
 
 router.route('/order-itens')
 	.post([OrderItens.perm,Token.validtoken,OrderItens.add])
