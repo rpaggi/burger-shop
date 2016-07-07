@@ -1,6 +1,4 @@
-<div data-ng-controller="ProductController as Product" class="row">
-  <h1>Adicionar produto</h1>
-
+<div data-ng-controller="ProductController as Product" class="row" ng-init="Application.contentTitle='Adicionar produto'">
   <form name="productForm">
     <div data-ng-class="{'invalid' : productForm.name.$invalid}">
       Nome: <input type="text" name="name" data-ng-model="Product.name" placeholder="Nome" required>

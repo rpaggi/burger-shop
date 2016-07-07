@@ -4,7 +4,8 @@ app.token = '5bbb1eggie145e1';
 
 function  ApplicationController(){
   var vm = this;
-  vm.templateUrl = 'views/home.html' //Default templateUrl
+  vm.templateUrl = 'views/home.html'; //Default templateUrl
+  vm.contentTitle = '';
 
   //var messageBox = angular.element( document.querySelector( '.message' ) );
   //messageBox.addClass();

@@ -23,7 +23,9 @@
 			</div>
 		</div>
 	</header>
-	<content ng-include="" src="Application.templateUrl">
+	<content>
+		<h1>{{Application.contentTitle}}</h1>
+		<div ng-include="" src="Application.templateUrl"></div>
 	</content>
 	<footer>
 		BurgerShop - Versão 1.0
