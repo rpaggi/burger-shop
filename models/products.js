@@ -46,6 +46,22 @@ exports.get = function(req, res){
 	});
 }
 
+exports.all = function(req, res){
+	req.getConnection(function(err, connection){
+		if(err) return res.status(400).json(jerror(err));
+
+		connection.query(
+			'SELECT * FROM '+ _tablename,
+			[],
+			function(err, result){
+				if(err) return res.status(400).json(jerror(err));
+
+				return res.status(200).json(result);
+			}
+		)
+	});
+}
+
 exports.delete = function(req, res){
 	var id = req.params.p;
 	req.getConnection(function(err, connection){

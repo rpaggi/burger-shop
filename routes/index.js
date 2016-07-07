@@ -46,6 +46,7 @@ router.route('/tables/:p')
 
 router.route('/products')
 	.post([Products.perm,Token.validtoken,Products.add])
+	.get([Products.perm,Token.validtoken,Products.all])
 router.route('/products/:p')
 	.get([Products.perm,Token.validtoken,Products.get])
 	.put([Products.perm,Token.validtoken,Products.update])
