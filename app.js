@@ -1,4 +1,3 @@
-require('getmodule');
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -16,7 +15,7 @@ var users = require('./routes/users');
 var mariadb = require('mariasql');
 var mysqlDump = require('mysqldump');
 var connection = require('express-mariaconnection');
-var connDump = getmodule('api_modules/conn-dump');
+var connDump = require('api_modules/conn-dump');
 var dbinfo = {
   host: 'localhost',
   user: 'root',

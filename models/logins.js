@@ -1,5 +1,5 @@
 var crypto = require('crypto');
-var TokenGenerator = getmodule('api_modules/token');
+var TokenGenerator = require('../api_modules/token');
 
 var updateToken = function(connection, id, token){
 	connection.query(
@@ -141,7 +141,7 @@ var updateToken = function(connection, id, token){
 
 		req.getConnection(function(err, connection){
 			if(err) return res.status(400).json(err);
-			
+
 			connection.query(
 				'UPDATE logins SET ? WHERE id = ?',
 				[data, id],

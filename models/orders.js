@@ -1,4 +1,4 @@
-var jerror = getmodule('api_modules/json-error');
+var jerror = require('../api_modules/json-error');
 
 exports.perm = function(req, res, next){
 	req.profiles = [1,2,3,4];

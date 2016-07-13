@@ -1,5 +1,5 @@
 var crypto = require('crypto');
-var TokenGenerator = getmodule('api_modules/token');
+var TokenGenerator = require('../api_modules/token');
 
 exports.perm = function(req, res, next){
 	req.profiles = [1,2,3];
@@ -106,7 +106,7 @@ exports.update = function(req, res){
 
 	req.getConnection(function(err, connection){
 		if(err) return res.status(400).json(err);
-		
+
 		connection.query(
 			'UPDATE clients SET ? WHERE id = ?',
 			[data, id],

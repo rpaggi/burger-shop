@@ -1,4 +1,4 @@
-var jerror = getmodule('api_modules/json-error');
+var jerror = require('../api_modules/json-error');
 var _tablename = "products"
 
 exports.perm = function(req, res, next){

@@ -1,16 +1,16 @@
 var express         = require('express');
 var router          = express.Router();
-var Profiles        = getmodule('models/profiles');
-var Logins          = getmodule('models/logins');
-var Tables          = getmodule('models/tables');
-var Orders          = getmodule('models/orders');
-var Clients         = getmodule('models/clients');
-var OrderSources    = getmodule('models/order-sources');
-var Products        = getmodule('models/products');
-var ProductsDetails = getmodule('models/products-details');
-var OrderItens      = getmodule('models/order-itens');
-var Token           = getmodule('api_modules/token');
-var Backup          = getmodule('api_modules/backup');
+var Profiles        = require('../models/profiles');
+var Logins          = require('../models/logins');
+var Tables          = require('../models/tables');
+var Orders          = require('../models/orders');
+var Clients         = require('../models/clients');
+var OrderSources    = require('../models/order-sources');
+var Products        = require('../models/products');
+var ProductsDetails = require('../models/products-details');
+var OrderItens      = require('../models/order-itens');
+var Token           = require('../api_modules/token');
+var Backup          = require('../api_modules/backup');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
