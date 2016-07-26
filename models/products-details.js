@@ -10,8 +10,8 @@ exports.add = function(req, res){
 
 	var data = req.body;
 
-	if(isNaN(data.value_sell) || data.value_sell == 0){
-		return res.status(400).json({err:"Valor de venda inválido"});
+	if(isNaN(data.product_id) || data.product_id == 0){
+		return res.status(400).json({err:"Id do produto inválido"});
 	}
 
 	if(data.name == null || data.name == ""){
