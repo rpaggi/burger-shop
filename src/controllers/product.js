@@ -3,7 +3,8 @@ app.controller('ProductController', ['$http', 'Scopes', function($http, Scopes){
   var messageBox  = Scopes.get('MessageBoxController');
   vm.id = Scopes.get('ProductID');
   vm.name = "";
-  vm.description = "";
+  vm.description = [];
+  vm.descLastId = 0;
   vm.valueSell = "0,00";
   vm.hincl = "";
   vm.disabled = false;
@@ -17,22 +18,36 @@ app.controller('ProductController', ['$http', 'Scopes', function($http, Scopes){
   function _cleanFields(){
     vm.id = 0
     vm.name = ""
-    vm.description = ""
+    vm.description = [];
     vm.valueSell = "0,00";
     vm.hincl = ""
+    vm.descLastId = 0;
   }
 
   vm.add = function(){
     var data = "name="+vm.name+
-               "&description="+vm.description+
                "&value_sell="+vm.valueSell//.replace(/,/g, '.');
-
 
     $http.post('http://localhost:3000/products', data, config)
     .then(function(response){
-      console.log(response);
-      messageBox.sucess('PROD0001');
-      _cleanFields();
+      var error = false;
+      for(d in vm.description){
+        var data = "product_id="+response.data.info.insertId+
+                   "name="+vm.description[d].name;
+        $http.post('http://localhost:3000/products-details', data, config)
+        .then(function(response){
+        }, function(response){
+          console.log("!!!error!!!");
+          console.log(JSON.stringify(response.data));
+          console.log("response status = " + response.status);
+          messageBox.error('PROD0002');
+          error = true;
+        })
+      }
+      if(!error){
+        messageBox.error('PROD0001');
+        _cleanFields();
+      }
     }, function (response){
       console.log("!!!error!!!");
       console.log(JSON.stringify(response.data));
@@ -105,6 +120,20 @@ app.controller('ProductController', ['$http', 'Scopes', function($http, Scopes){
         console.log("response status = " + response.status);
         messageBox.error('PROD0005');
       });
+    }
+  }
+
+  vm.addDescription = function(){
+    vm.description.push(angular.copy({id:vm.descLastId, name:vm.descriptionT}));
+    vm.descriptionT = "";
+    vm.descLastId++;
+  }
+
+  vm.removeDescription = function(id){
+    for(d in vm.description){
+      if(id == vm.description[d].id){
+        vm.description.splice(d, 1);
+      }
     }
   }
 }]);

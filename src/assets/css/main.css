@@ -69,8 +69,12 @@ footer {
   margin-left: -0.5em
 }
 
-.grey-text-placehoder::-webkit-input-placeholder{
+.green-text-placehoder::-webkit-input-placeholder{
   color: #26a69a;
+}
+
+.grey-text-placehoder::-webkit-input-placeholder{
+  color: #a3a5a3;
 }
 
 .btn{
@@ -88,4 +92,11 @@ footer {
 
 .input-margin{
   margin-top: 1em;
+}
+
+select {
+  display: block !important;
+  background-color: transparent !important;
+  border: none !important;
+  height: 80px;
 }

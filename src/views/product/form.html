@@ -5,7 +5,12 @@
   </div>
   <div class="input-margin">
     <label for="description">Descrição</label>
-    <input ng-disabled="Product.disabled" type="text" id="description" data-ng-model="Product.description" placeholder="Description">
+    <input ng-disabled="Product.disabled" type="text" id="descriptionAdd" data-ng-model="Product.descriptionT" placeholder="Item" class="grey-text-placehoder">
+    <button class="btn blue" data-ng-click="Product.addDescription()">Adicionar item</button>
+    <br>
+    <div data-ng-repeat="desc in Product.description | orderBy: 'name'">
+      <button data-ng-click="Product.removeDescription(desc.id)" class="btn red">X</button> {{desc.name}}
+    </div>
   </div>
   <div data-ng-class="{'invalid' : productForm.valueSell.$invalid}" class="input-margin">
     <label for="valueSell">Preço</label>
