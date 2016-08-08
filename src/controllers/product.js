@@ -33,7 +33,7 @@ app.controller('ProductController', ['$http', 'Scopes', function($http, Scopes){
       var error = false;
       for(d in vm.description){
         var data = "product_id="+response.data.info.insertId+
-                   "name="+vm.description[d].name;
+                   "&name="+vm.description[d].name;
         $http.post('http://localhost:3000/products-details', data, config)
         .then(function(response){
         }, function(response){
@@ -45,7 +45,7 @@ app.controller('ProductController', ['$http', 'Scopes', function($http, Scopes){
         })
       }
       if(!error){
-        messageBox.error('PROD0001');
+        messageBox.sucess('PROD0001');
         _cleanFields();
       }
     }, function (response){
@@ -60,8 +60,10 @@ app.controller('ProductController', ['$http', 'Scopes', function($http, Scopes){
     $http.get('http://localhost:3000/products', config)
     .then(function(response){
       vm.products = sortJson(response.data, 'name', true);
+      for(p in vm.products){
+        console.log(vm.products[p].id);
+      }
     }, function (response){
-      console.log("!!!error!!!");
       console.log(JSON.stringify(response.data));
       console.log("response status = " + response.status);
       messageBox.error('PROD0003');
