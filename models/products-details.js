@@ -51,11 +51,12 @@ exports.getProduct = function(req, res){
 
 	req.getConnection(function(err, connection){
 		if(err) return res.status(400).json(jerror(err));
-
+		console.log("Connectd");
 		connection.query(
-			'SELECT * FROM '+ _tablename + 'WHERE product_id = ?',
+			'SELECT * FROM '+ _tablename + ' WHERE product_id = ?',
 			[pid],
 			function(err, result){
+				console.log(jerror(err));
 				if(err) return res.status(400).json(jerror(err));
 
 				return res.status(200).json(result);
