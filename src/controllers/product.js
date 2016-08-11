@@ -61,9 +61,21 @@ app.controller('ProductController', ['$http', 'Scopes', function($http, Scopes){
     .then(function(response){
       vm.products = sortJson(response.data, 'name', true);
       for(p in vm.products){
-        console.log(vm.products[p].id);
+        vm.products[p].description = ""
+
+        $http.get('http://localhost:3000/products-details/product/'+vm.products[p].id, config)
+        .then(function(response){
+          console.log(response);
+          for(var i=0;i<response.data.length;i++){
+            vm.products[p].description += response.data[i].name;
+
+            if(i < (response.data.length-1))
+              vm.products[p].description += ', ';
+          }
+        })
       }
     }, function (response){
+      console.log("!!!error!!!");
       console.log(JSON.stringify(response.data));
       console.log("response status = " + response.status);
       messageBox.error('PROD0003');
@@ -79,9 +91,17 @@ app.controller('ProductController', ['$http', 'Scopes', function($http, Scopes){
     .then(function(response){
       vm.id = response.data[0].id;
       vm.name = response.data[0].name;
-      vm.description = response.data[0].description;
       vm.valueSell = response.data[0].value_sell;
       vm.hincl = response.data[0].hincl;
+
+      $http.get('http://localhost:3000/products-details/product/'+vm.id, config)
+      .then(function(response){
+        vm.descLastId = 0;
+        for(i in response.data){
+          vm.description.push(angular.copy({id:vm.descLastId, name:response.data[i].name}));
+          vm.descLastId++;
+        }
+      })      
     }, function (response){
       console.log("!!!error!!!");
       console.log(JSON.stringify(response.data));
