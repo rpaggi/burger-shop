@@ -5,7 +5,8 @@ app.factory('Messages', function ($rootScope) {
       'PROD0003':'Erro ao consultar produtos na base de dados',
       'PROD0004':'Produto alterado com sucesso',
       'PROD0005':'Erro ao alterar o produto',
-      'PROD0006':'Erro ao deletar o produto'
+      'PROD0006':'Erro ao deletar o produto',
+      'PROD0007':'Erro ao remover descição'
     };
 
     return {
