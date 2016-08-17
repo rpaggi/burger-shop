@@ -51,14 +51,25 @@ exports.getProduct = function(req, res){
 
 	req.getConnection(function(err, connection){
 		if(err) return res.status(400).json(jerror(err));
-		console.log("Connectd");
 		connection.query(
 			'SELECT * FROM '+ _tablename + ' WHERE product_id = ?',
 			[pid],
 			function(err, result){
-				console.log(jerror(err));
 				if(err) return res.status(400).json(jerror(err));
+				return res.status(200).json(result);
+			}
+		)
+	});
+}
 
+exports.getAll = function(req, res){
+	req.getConnection(function(err, connection){
+		if(err) return res.status(400).json(jerror(err));
+		connection.query(
+			'SELECT * FROM '+ _tablename,
+			[],
+			function(err, result){
+				if(err) return res.status(400).json(jerror(err));
 				return res.status(200).json(result);
 			}
 		)
@@ -73,6 +84,23 @@ exports.delete = function(req, res){
 		connection.query(
 			'DELETE FROM '+ _tablename +' WHERE id = ?',
 			[id],
+			function(err, result){
+				if(err) return res.status(400).json(jerror(err));
+
+				return res.status(200).json(result);
+			}
+		)
+	});
+}
+
+exports.deleteProduct = function(req, res){
+	var pid = req.params.p;
+	req.getConnection(function(err, connection){
+		if(err) return res.status(400).json(jerror(err));
+
+		connection.query(
+			'DELETE FROM '+ _tablename +' WHERE product_id = ?',
+			[pid],
 			function(err, result){
 				if(err) return res.status(400).json(jerror(err));
 
