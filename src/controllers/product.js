@@ -72,9 +72,11 @@ app.controller('ProductController', ['$http', 'Scopes', function($http, Scopes){
 
           for(var j=0;j<productDetails.length;j++){
             if(vm.products[i].id == productDetails[j].product_id){
-                vm.products[i].description += productDetails[j].name+"  ";
+                vm.products[i].description += productDetails[j].name+", ";
             }
           }
+          vm.products[i].description = vm.products[i].description.substring(0,
+                                       vm.products[i].description.length-2);
         }
       })
       vm.products = sortJson(response.data, 'name', true);
