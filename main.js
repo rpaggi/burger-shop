@@ -48,10 +48,19 @@ function createWindow () {
   );
   menu.append(
     new MenuItem({
+      label: '&Pedidos',
+      submenu:[
+        {label: "&Novo", click(){mainWindow.webContents.send('menu', 'order-add');}, accelerator: "F3"},
+        {label: "&Consultar", click(){mainWindow.webContents.send('menu', 'order-consult')}, accelerator: "F4"}
+      ]
+    })
+  );
+  menu.append(
+    new MenuItem({
       label: '&Produtos',
       submenu:[
-        {label: "&Consultar", click(){mainWindow.webContents.send('menu', 'product-consult')}, accelerator: "F3"},
-        {label: "&Novo", click(){mainWindow.webContents.send('menu', 'product-add');}, accelerator: "F4"}
+        {label: "&Novo", click(){mainWindow.webContents.send('menu', 'product-add');}, accelerator: "F6"},
+        {label: "&Consultar", click(){mainWindow.webContents.send('menu', 'product-consult')}, accelerator: "F7"}
       ]
     })
   );

@@ -1,0 +1,17 @@
+<div data-ng-controller="ProductController as Product" class="row table-scroll" ng-init="Application.contentTitle='Detalhe do produto'; Product.loadProduct(); Product.disabled=true">
+  <div class="col s12">
+    <div class="col s2"><b>Id: {{Product.id}}</div>
+    <div class="col s4 offset-s6">Data da Inclusão: {{Product.hincl}}</div>
+    <div ng-include="'views/product/form.html'" class="margin-top-8em"></div>
+  </div>
+  <div class="button-bar col s12">
+    <div id="left-buttons" class="col s6">
+      <button class="btn btn-large grey waves-effect waves-light" type="button" name="Voltar" data-ng-click="Application.templateUrl='views/product/consult.html'">Voltar</button>
+    </div>
+    <div id="right-buttons" class="col s6">
+      <button class="btn btn-large blue waves-effect waves-light right" type="button" name="Alterar" ng-disabled="!Product.disabled" data-ng-click="Product.disabled=false">Alterar</button>
+      <button class="btn btn-large green waves-effect waves-light right" type="button" name="Alterar" ng-disabled="Product.disabled" data-ng-click="Product.save()">Salvar</button>
+      <button class="btn btn-large red waves-effect waves-light right" type="button" name="Deletar" data-ng-click="Product.delete(Application.setTemplateUrl);">Deletar</button>
+    </div>
+  </div>
+</div>
